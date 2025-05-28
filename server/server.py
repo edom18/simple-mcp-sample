@@ -1,20 +1,20 @@
 from typing import Any
 from mcp.server.models import InitializationOptions
 from mcp.server import NotificationOptions, Server
-import mcp.types as types
+import mcp.types as MCPTypes
 import mcp.server.stdio
 import asyncio
 
 server = Server("SimpleMCPServer")
 
 @server.list_tools()
-async def handle_list_tools() -> list[types.Tool]:
+async def handle_list_tools() -> list[MCPTypes.Tool]:
     """
     List available tools for simple text operations.
     """
 
     return [
-        types.Tool(
+        MCPTypes.Tool(
             name="reverse-text",
             description="Reverse the input text.",
             inputSchema={
@@ -28,7 +28,7 @@ async def handle_list_tools() -> list[types.Tool]:
                 "required": ["text"],
             },
         ),
-        types.Tool(
+        MCPTypes.Tool(
             name="uppercase",
             inputSchema={
                 "type": "object",
@@ -46,7 +46,7 @@ async def handle_list_tools() -> list[types.Tool]:
 @server.call_tool()
 async def handle_call_tool(
     name: str, arguments: dict | None
-) -> list[types.TextContent]:
+) -> list[MCPTypes.TextContent]:
     """
     Handle tool execution requests
     """
@@ -56,7 +56,7 @@ async def handle_call_tool(
 
     text = arguments.get("text")
     if not text:
-        return [types.TextContent(type="text", text="Error: Missing text parameter")]
+        return [MCPTypes.TextContent(type="text", text="Error: Missing text parameter")]
 
     if name == "reverse-text":
         result = text[::-1]
@@ -65,7 +65,7 @@ async def handle_call_tool(
     else:
         raise ValueError(f"Unknown tool {name}")
 
-    return [types.TextContent(type="text", text=result)]
+    return [MCPTypes.TextContent(type="text", text=result)]
 
 async def main():
     print("Launcing an MCP server...")
