@@ -30,6 +30,7 @@ async def handle_list_tools() -> list[MCPTypes.Tool]:
         ),
         MCPTypes.Tool(
             name="uppercase",
+            description="Modify input text to upper case.",
             inputSchema={
                 "type": "object",
                 "properties": {
