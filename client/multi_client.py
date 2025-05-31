@@ -98,8 +98,17 @@ class MultiMCPClient:
         """
         Clean up all client connections.
         """
-        for client in self.clients.values():
-            await client.cleanup()
+        cleanup_errors = []
+        for name, client in reversed(list(self.clients.items())):
+            try:
+                await client.cleanup()
+            except Exception as e:
+                cleanup_errors.append(f"Error cleaning up {name}: {e}")
+
+        if cleanup_errors:
+            print("Cleanup warnings:")
+            for error in cleanup_errors:
+                print(f"    - {error}")
 
 async def main():
     import sys
