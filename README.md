@@ -13,7 +13,7 @@ There are two shell scripts for launching demos: one for a single client and one
 
 ## Launch the single client demo
 
-Please perform `single-client-launch-demo.sh`.
+Run `single-client-launch-demo.sh`.
 
 ```shell
 $ ./single-client-launch-demo.sh
@@ -44,7 +44,7 @@ When you send a request containing `reverse text` or `upper text`, the AI will u
 
 ## Launch the multi client demo
 
-Please perform `multi-client-launch-demo.sh`.
+Run `multi-client-launch-demo.sh`.
 
 ```shell
 $ ./multi-client-launch-demo.sh
